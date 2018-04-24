@@ -1,0 +1,218 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Demo: Reconocimiento Facial Azure - GAB</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/CamScripts/css/styles.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <div class="panel panel-info">
+            <div class="panel-heading">Toma una foto</div>
+            <div class="panel-body">
+
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-sm-4"></div>
+                    <div class="col-md-4 col-lg-4 col-sm-4">
+                        <div class="app">
+                            <a href="#" id="start-camera" class="visible">Toque aquí para iniciar aplicación.</a>
+                            <video id="camera-stream"></video>
+                            <img id="snap">
+                            <p id="error-message">
+                            </p>
+
+                            <!-- Hidden canvas element. Used for taking snapshot of video. -->
+                            <canvas width="300" height="400"></canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-4">
+
+                        <div class="controls">
+                            <div style="font-size:1.5em; color:Tomato">
+                                <a href="#" id="take-photo" title="Capturar foto">
+                                    <i class="fas fa-camera-retro fa-sm btn btn-default">
+                                        Capturar
+                                    </i>
+                                </a>
+                            </div>
+                            <br />
+                            <div style="font-size:1.5em; color:Tomato">
+                                <a href="#" id="delete-photo" title="Eliminar" class="disabled">
+                                    <i class="fas fa-trash fa-sm btn btn-default">
+                                        Descartar
+                                    </i>
+                                </a>
+                            </div>
+                            <br />
+                            <div style="font-size:1.5em; color:Tomato">
+                                <a href="#" id="download-photo" download="selfie.png" title="Descargar Foto"
+                                   class="disabled">
+                                    <i class="fas fa-download fa-sm btn btn-default">
+                                        Descargar
+                                    </i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="container">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Datos Principales</div>
+                        <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="age">Edad</label>
+                                            <input type="text" class="form-control" id="age">
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="age">Género</label>
+                                            <input type="text" class="form-control" id="gender">
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="age">Lentes</label>
+                                            <input type="text" class="form-control" id="glasses">
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="age">Sonrisa</label>
+                                            <input type="text" class="form-control" id="smile">
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="container">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">Emociones</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="age">Enfado</label>
+                                            <input type="text" class="form-control" id="anger">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="age">Desprecio</label>
+                                            <input type="text" class="form-control" id="contempt">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="age">Temor</label>
+                                            <input type="text" class="form-control" id="fear">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="age">Disgusto</label>
+                                            <input type="text" class="form-control" id="disgust">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="age">Tristeza</label>
+                                            <input type="text" class="form-control" id="sadness">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="age">Sorpresa</label>
+                                            <input type="text" class="form-control" id="surprise">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="age">Felicidad</label>
+                                            <input type="text" class="form-control" id="happiness">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="age">Neutralidad</label>
+                                            <input type="text" class="form-control" id="neutral">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+
+       
+
+        <script src="~/CamScripts/CanvasAzureScript.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <style>
+            .contant {
+                border: 1px solid #ddd;
+                border-radius: 4px;
+                width: 500px;
+                padding: 20px;
+                margin: 0 auto;
+                text-align: center;
+            }
+        </style>
+</body>
+</html>
+
